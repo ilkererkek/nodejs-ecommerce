@@ -16,12 +16,12 @@ exports.getBrands = asyncHandler(async (req, res, next) => {
 exports.getBrand = asyncHandler(async (req, res, next) => {
     
     const brand = await Brand.findById(req.params.id);
-    if(!bootcamp){
+    if(!brand){
         return next( new ErrorResponse(`Category not found with id of ${req.params.id}`,404))
     }
     return res.status(200).json({
         success: true,
-        data: bootcamp
+        data: brand
     })
    
 });
@@ -31,8 +31,7 @@ exports.getBrand = asyncHandler(async (req, res, next) => {
 //@access   Private
 exports.createBrand = asyncHandler(async (req, res, next) => {
     
-    const brand = await Brand.create(req.body);
-
+    const brand = await Brand.create(req.body)
     return res.status(201).json({
         succes: true,
         data: brand
@@ -44,13 +43,13 @@ exports.createBrand = asyncHandler(async (req, res, next) => {
 //@access   Private
 exports.updateBrand = asyncHandler(async (req, res, next) => {
     
-    let bootcamp = Bootcamp.findById(req.params.id);
-    if(!bootcamp)
+    let brand = Brand.findById(req.params.id);
+    if(!brand)
     {
         return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`,404));
     }
 
-    bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body,{
+    brand = await Brand.findByIdAndUpdate(req.params.id, req.body,{
         new: true,
         runValidators:true
     });
@@ -65,13 +64,13 @@ exports.updateBrand = asyncHandler(async (req, res, next) => {
 //@access   Private
 exports.deleteBrand = asyncHandler(async (req, res, next) => {
     
-    let bootcamp = Bootcamp.findById(req.params.id);
-    if(!bootcamp)
+    let brand = Brand.findById(req.params.id);
+    if(!brand)
     {
         return next(new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`,404));
     }
 
-    await bootcamp.remove();
+    await Brand.deleteOne(brand)
     return res.status(201).json({
         succes: true,
         data: {}

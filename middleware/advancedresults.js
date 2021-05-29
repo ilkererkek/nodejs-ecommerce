@@ -10,7 +10,7 @@ const advancedresults = ( model, populate) => async ( req, res, next) => {
     let queryStr = JSON.stringify(reqQuery);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
-    query = model.find(JSON.parse(queryStr));
+     query = model.find(JSON.parse(queryStr));
 
     if(req.query.select){
         const fields = req.query.select.split(',').join(' ');

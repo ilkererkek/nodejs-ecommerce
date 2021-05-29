@@ -1,9 +1,10 @@
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require('../middleware/async');
 const errorHandler = (error, req, res, next) => {
-    let err = {... error};
+  
+    let err = {...error};
     err.message = error.message;
-    console.log(error.stack.red.italic);
+    console.log( error.stack.red.italic);
 
     if(error.name == 'CastError'){
         const message = `Resource not found with id of ${error.value}`;

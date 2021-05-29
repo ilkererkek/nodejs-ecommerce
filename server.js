@@ -5,8 +5,10 @@ const path= require('path')
 const morgan=require('morgan');
 
 const connectDB = require('./config/MongoDB');
+const errorHandler = require('./middleware/error')
 
 const products = require('./routes/products');
+const brands = require('./routes/brands');
 
 const app = express();
 
@@ -14,9 +16,10 @@ app.use(express.json());
 dotenv.config({ path: './config/config.env' });
 connectDB();
 
-app.use('/products',products)
 
+app.use('/brands',brands)
 
+app.use(errorHandler);
 
 if(process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));

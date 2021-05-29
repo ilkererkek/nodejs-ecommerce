@@ -1,8 +1,16 @@
 const Router = require('express').Router();
+const { createBrand, getBrand , getBrands , updateBrand , deleteBrand} = require('../controllers/brands')
+const Brand = require('../models/Brand');
 
-Router.route('/').get((req,res,next)=> res.status(200).json({
-    "message":"hello"
-}))
+const advancedResults = require('../middleware/advancedresults');
 
+Router.route('/')
+    .get(advancedResults(Brand),getBrands)
+    .post(createBrand)
+
+Router.route('/:id')
+    .get(getBrand)
+    .put(updateBrand)
+    .delete(deleteBrand)
 
 module.exports = Router;

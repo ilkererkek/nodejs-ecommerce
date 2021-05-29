@@ -5,7 +5,8 @@ const BrandSchema = new mongoose.Schema({
         type : String,
         required: [true, 'Please enter Category title'],
         trim: true,
-        maxlength: [50, 'Name can not be longer than 50 characters']
+        maxlength: [50, 'Name can not be longer than 50 characters'],
+        unique : true,
     },
     photo: {
         type:String,
@@ -13,4 +14,4 @@ const BrandSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Category',CategorySchema);
+module.exports = mongoose.model('Brand', BrandSchema);
